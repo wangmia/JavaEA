@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.swing.text.TabableView;
+import java.util.*;
 
 public class Likou {
 
@@ -29,7 +28,7 @@ public class Likou {
             if(sts[i]==' '){
                 continue;
             }
-            System.out.println(i);
+//            System.out.println(i);
             for(int j=0;j<3;j++){
                 if(sts[j]==stt[j]){
                     if(sts[j+1]!=stt[j+3]&&(sts[j+1]!=' '&&sts[j+2]!=stt[j+3])){
@@ -99,4 +98,133 @@ public class Likou {
         return radius;
     }
 
+//    截取字符串
+    public String reverseLeftWords(String s, int n) {
+        s = s.substring(n)+s.substring(0,n);
+        return s;
+    }
+
+//    亲密字符串
+    public boolean buddyStrings(String A, String B) {
+
+        if((A.length()<=0||A.length()>20000)||(B.length()<=0||B.length()>20000)){
+            return false;
+        }
+
+        Set<Character> set = new HashSet<>();
+        char[] a = A.toCharArray();
+        char[] b = B.toCharArray();
+
+        char tmp;
+        int index = -1;
+        for(int i = 0; i < A.length(); i ++){
+            set.add(a[i]);
+            if(a[i] != b[i]) {
+                if (index == -1) {
+                    index = i;
+                } else {
+                    tmp = a[index];
+                    a[index] = a[i];
+                    a[i] = tmp;
+                    if (B.equals(new String(a))) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        if(index == -1 && set.size() < A.length()){
+            return true;
+        }
+
+        return false;
+    }
+
+//    截取字符串返回最后的长度
+    public int lengthOfLastWord(String s) {
+        String [] str = s.split(" ");
+        if(s.equals("")||str.length<=0){
+            return 0;
+        }else{
+            return str[str.length-1].length();
+        }
+    }
+
+    //  非递减数列
+    public boolean checkPossibility(int[] nums) {
+        int count=0,temp=0;
+        for(int i=0;i<nums.length-1;i++){
+            //出现不满足非递减的情况
+            if(nums[i]>nums[i+1]){
+                //第二次出现非递减时直接返回false
+                if(count++>0){
+                    return false;
+                }
+                if(nums[i+1]<temp){
+                    nums[i+1]=nums[i];
+                }else{
+                    nums[i]=temp;
+                }
+            }
+            temp=nums[i];
+        }
+        return true;
+    }
+
+//    只出现一次的数字
+    public int singleNumber(int[] nums) {
+        Set<Integer> set = new HashSet();
+        int number = 0;
+        set.add(nums[0]);
+        for (int i=1;i<nums.length;i++){
+            if(!set.contains(nums[i])){
+                set.add(nums[i]);
+            }else {
+                set.remove(nums[i]);
+            }
+        }
+        for (int i:set) {
+            number = i;
+        }
+        return number;
+    }
+
+//    平方数之和
+    public boolean judgeSquareSum(int c) {
+        for (int a = 0;a<=(int)Math.sqrt(c);a++){
+            // q 是b的平方
+            int q = c-a*a;
+            double b = Math.sqrt(q);
+            if(b==(int)b){
+                return true;
+            }
+        }
+        return false;
+    }
+
+//  上升下降字符串
+    public String sortString(String s) {
+        String s1 = "";
+        char n[] = s.toCharArray();
+        char min = n[0];
+        char max = n[0];
+        int c = s.length();
+        for (int i=1;i<s.length();i++){
+            if(min>n[i]){
+                min = n[i];
+            }
+            if(max<n[i]){
+                max = n[i];
+            }
+        }
+        for (int j=0;j<c;j++){
+            for (int i=0;i<s.length();i++){
+                if(min)
+            }
+        }
+
+
+        return "";
+    }
 }
